@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  web:    
+    image: samiahmedshaik77/ejbca-ce
+    restart: always
+    environment:
+      DATABASE_JDBC_URL: jdbc:mysql://db:3306/ejbca-database?characterEncoding=UTF-8
+      DATABASE_USER: ejbca
+      DATABASE_PASSWORD: pa$$w0rd
+      ORG_NAME: PAM
+      CA_NAME: RootCA
+    ports:
+      - "8443:8443"
+      - "8080:8080"
+    depends_on:
+      - db
+    hostname: pam-pki.infra.com
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pa$$w0rd
+      MYSQL_DATABASE: ejbca-database
+      MYSQL_USER: ejbca
+      MYSQL_PASSWORD: pa$$w0rd      
+    volumes:
+      - datavolume:/var/lib/mysql
+    hostname: pam-pki-db.infra.com   
+      
+volumes:
+  datavolume:
