@@ -9,12 +9,14 @@ services:
       DATABASE_PASSWORD: pa$$w0rd
       ORG_NAME: PAM
       CA_NAME: RootCA
+      SMTP_DESTINATION: mail
     ports:
       - "8443:8443"
       - "8080:8080"
     depends_on:
       - db
-    hostname: pam-pki.infra.com
+      - mail
+    hostname: pki.pam.com
   db:
     image: mariadb
     restart: always
@@ -22,10 +24,23 @@ services:
       MYSQL_ROOT_PASSWORD: pa$$w0rd
       MYSQL_DATABASE: ejbca-database
       MYSQL_USER: ejbca
-      MYSQL_PASSWORD: pa$$w0rd      
+      MYSQL_PASSWORD: pa$$w0rd  
+      SMTP_DESTINATION: mail
     volumes:
-      - datavolume:/var/lib/mysql
-    hostname: pam-pki-db.infra.com   
-      
+      - dbdatavolume:/var/lib/mysql
+    hostname: pki-db.pam.com
+  mail:
+    image: analogic/poste.io
+    restart: always
+    environment:
+      HTTPS_PORT: 9443
+      HTTP_PORT: 9080
+    ports:
+      - "9443:9443"
+      - "9080:9080"
+    volumes:
+      - maildatavolume:/data 
+    hostname: pki-mail.pam.com    
 volumes:
-  datavolume:
+  dbdatavolume:
+  maildatavolume:
