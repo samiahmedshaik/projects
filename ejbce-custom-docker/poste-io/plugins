@@ -1,0 +1,82 @@
+status_http
+
+poste
+limits
+stats
+srs
+guard
+hello_block
+block_bad_connections
+
+# KARMA plugins -------------------
+
+karma
+
+early_talker
+# talks before hello
+
+asn
+# look ups asn for later analyze
+
+helo.checks
+# checks validity of client hello
+
+p0f
+# recognize remote system and connection
+
+fcrdns
+# tests if reverse DNS matches IP
+
+geoip
+
+dnsbl
+# dnsbl checks
+
+# mail_from.is_resolvable
+# if mail_from header is OK
+
+dkim_verify
+# DKIM verify
+
+spf
+# SPF checks
+
+data.uribl
+# uribl checks
+
+data.headers
+# checks headers inside mail
+
+known-senders
+# increase the reputation of domains you exchange email with by sending them email.
+
+bounce
+# ----------------------------------
+
+log
+redis
+relay
+tls
+rcpt_database
+dkim_sign
+auth/poste
+discard
+dovecot_quota
+rspamd
+attachment
+clamd
+strict_from
+privacy
+inspection
+
+queue/dmarc-report-save
+queue/decide
+queue/quarantine
+
+queue/lmtp
+
+watch
+
+limit
+
+# CUSTOM plugins -------------------

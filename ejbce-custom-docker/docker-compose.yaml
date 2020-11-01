@@ -25,12 +25,11 @@ services:
       MYSQL_DATABASE: ejbca-database
       MYSQL_USER: ejbca
       MYSQL_PASSWORD: pa$$w0rd  
-      SMTP_DESTINATION: mail
     volumes:
       - dbdatavolume:/var/lib/mysql
     hostname: pki-db.pam.com
   mail:
-    image: analogic/poste.io
+    image: samiahmedshaik77/poste.io
     restart: always
     environment:
       HTTPS_PORT: 9443
